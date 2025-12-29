@@ -12,6 +12,7 @@
 :root {
   --max-w: 480px;
 }
+
 /* ===== BODY ===== */
 body {
   margin: 0;
@@ -19,26 +20,9 @@ body {
   background: linear-gradient(135deg, #ffd6e8, #ffe0f0, #ffb6d5);
   min-height: 100svh;
   overflow-x: hidden;
-  overflow-y: auto;
   display: flex;
   justify-content: center;
-}
-
-/* Background bubbles */
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  inset: -50%;
-  background: radial-gradient(circle, rgba(255,255,255,.12) 2%, transparent 2%);
-  background-size: 40px 40px;
-  animation: bubbles 40s linear infinite;
-  z-index: -1;
-}
-body::after { animation-duration: 60s; opacity: .3; }
-
-@keyframes bubbles {
-  to { transform: rotate(360deg); }
+  align-items: center;
 }
 
 /* ===== CONTAINER ===== */
@@ -46,21 +30,28 @@ body::after { animation-duration: 60s; opacity: .3; }
   width: 100%;
   max-width: var(--max-w);
   padding: 16px;
-  box-sizing: border-box;
   text-align: center;
 }
 
 /* ===== PAGES ===== */
-.page { display: none; }
-.page.active { display: block; }
+.page {
+  display: none;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.page.active {
+  display: flex;
+}
 
 /* ===== ENVELOPE ===== */
 .envelope {
   width: 100%;
-  max-width: 360px;
-  height: 220px;
-  margin: auto;
-  border-radius: 24px;
+  max-width: 320px;
+  height: 200px;
+  border-radius: 22px;
   background: linear-gradient(145deg, #ffd9ea, #ffb6d5);
   box-shadow: 0 20px 40px rgba(255,105,180,.35);
   position: relative;
@@ -84,7 +75,7 @@ body::after { animation-duration: 60s; opacity: .3; }
   inset: 0;
   display: grid;
   place-items: center;
-  font-size: 40px;
+  font-size: 38px;
   cursor: pointer;
   animation: pulse 1.3s infinite;
 }
@@ -101,21 +92,20 @@ body::after { animation-duration: 60s; opacity: .3; }
 }
 
 .sub-text {
-  font-size: 15px; /* ⬅️ increased slightly */
+  font-size: 16px;
   color: #7a2d5c;
-  letter-spacing: 1px;
+  margin-top: 6px;
 }
 
 /* ===== GIFT ===== */
 .gift img {
-  width: 100%;
-  max-width: 200px;
+  width: 160px; /* 🔽 reduced size */
   animation: pop 1s infinite alternate;
   cursor: pointer;
 }
 
 @keyframes pop {
-  to { transform: scale(1.1); }
+  to { transform: scale(1.08); }
 }
 
 /* ===== CARD ===== */
@@ -126,25 +116,22 @@ body::after { animation-duration: 60s; opacity: .3; }
   box-shadow: 0 10px 25px rgba(0,0,0,.15);
 }
 
-/* I'm Sorry heading */
 .card h2 {
   margin-top: 0;
   font-size: 26px;
   font-family: 'Playfair Display', serif;
 }
 
-/* Apology paragraph (BIGGER & readable) */
 .card p {
-  font-size: 15.5px;   /* ⬅️ increased */
+  font-size: 15.5px;
   line-height: 1.7;
   color: #444;
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
-/* Button */
 .btn {
   margin-top: 14px;
-  padding: 10px 20px;
+  padding: 10px 22px;
   border: none;
   border-radius: 20px;
   background: #c9b7ff;
@@ -156,6 +143,7 @@ body::after { animation-duration: 60s; opacity: .3; }
   display: flex;
   flex-direction: column;
   gap: 12px;
+  align-items: center;
 }
 
 .flowers img {
@@ -182,7 +170,6 @@ body::after { animation-duration: 60s; opacity: .3; }
 @media (min-width: 600px) {
   .flowers {
     flex-direction: row;
-    align-items: center;
   }
 }
 </style>
@@ -192,62 +179,64 @@ body::after { animation-duration: 60s; opacity: .3; }
 
 <div class="container">
 
-<!-- PAGE 1 -->
-<div id="page1" class="page active">
-  <div id="envelope" class="envelope">
-    <div class="flap"></div>
-    <div class="heart" onclick="openEnvelope()">❤️</div>
+  <!-- PAGE 1 -->
+  <div id="page1" class="page active">
+    <div id="envelope" class="envelope">
+      <div class="flap"></div>
+      <div class="heart" onclick="openEnvelope()">❤️</div>
+    </div>
+    <div class="open-text">Open</div>
+    <div class="sub-text">PLEASEEEEE</div>
   </div>
-  <div class="open-text">Open</div>
-  <div class="sub-text">PLEASEEEEE</div>
-</div>
 
-<!-- PAGE 2 -->
-<div id="page2" class="page">
-  <div class="gift" onclick="openLetter()">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGcyKqoXcS4e-aMwz8odGT5fjUxiHFaVpsZw&s">
+  <!-- PAGE 2 -->
+  <div id="page2" class="page">
+    <div class="gift" onclick="openLetter()">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGcyKqoXcS4e-aMwz8odGT5fjUxiHFaVpsZw&s">
+    </div>
+    <div class="sub-text">Click the gift 💜</div>
   </div>
-  <div class="sub-text">Click the gift 💜</div>
-</div>
 
-<!-- PAGE 3 -->
-<div id="page3" class="page">
-  <div class="card">
-    <h2>💗 I’m Sorry</h2>
-    <p>
-      I’m really sorry for everything, Akka.<br>
-      For every word, every moment, every pain I caused you.<br>
-      It’s a weight I carry with me every day.<br><br>
-
-      You are not just my sister.<br>
-      You are my strength, my comfort,
-      and the place my heart feels at home.<br><br>
-
-      I miss you more than I can explain.<br>
-      Your voice, your smile, the way you talk to me —
-      everything feels incomplete without you.<br><br>
-
-      I don’t want anything else right now.<br>
-      I just want to talk to you again, Akka.
-    </p>
-    <button class="btn" onclick="openFlowers()">Next</button>
-  </div>
-</div>
-
-<!-- PAGE 4 -->
-<div id="page4" class="page">
-  <div class="flowers">
-    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=600">
-    <div class="flower-card">
-      <h3>With Love 💐</h3>
+  <!-- PAGE 3 -->
+  <div id="page3" class="page">
+    <div class="card">
+      <h2>💗 I’m Sorry</h2>
       <p>
-        Please accept my apology.<br><br>
-        I really miss you Akka 🥺<br><br>
-        <strong>I ❤️ U</strong>
+        I’m really sorry for everything, Akka.<br>
+        For every word, every moment, every pain I caused you.<br>
+        It’s a weight I carry with me every day.<br><br>
+
+        You are not just my sister.<br>
+        You are my strength, my comfort,
+        and the place my heart feels at home.<br><br>
+
+        I miss you more than I can explain.<br>
+        Your voice, your smile, the way you talk to me —
+        everything feels incomplete without you.<br><br>
+
+        I don’t want anything else right now.<br>
+        I just want to talk to you again, Akka.
       </p>
+      <button class="btn" onclick="openFlowers()">Next</button>
     </div>
   </div>
-</div>
+
+  <!-- PAGE 4 -->
+  <div id="page4" class="page">
+    <div class="flowers">
+      <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=600">
+      <div class="flower-card">
+        <h3>With Love 💐</h3>
+        <p>
+          Please accept my apology.<br><br>
+          I really miss you Akka 🥺<br><br>
+          give me one chance Akka<br><br>
+
+          <strong>I ❤️ U</strong>
+        </p>
+      </div>
+    </div>
+  </div>
 
 </div>
 
