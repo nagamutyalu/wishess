@@ -5,13 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Little Gift</title>
 
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
 <style>
-/* ================= ROOT ================= */
 :root {
   --max-w: 480px;
 }
 
-/* ================= BODY ================= */
+/* ===== BODY ===== */
 body {
   margin: 0;
   font-family: "Comic Sans MS", Arial, sans-serif;
@@ -23,7 +25,7 @@ body {
   justify-content: center;
 }
 
-/* floating bubbles (safe) */
+/* Background bubbles */
 body::before,
 body::after {
   content: "";
@@ -40,7 +42,7 @@ body::after { animation-duration: 60s; opacity: .3; }
   to { transform: rotate(360deg); }
 }
 
-/* ================= CONTAINER ================= */
+/* ===== CONTAINER ===== */
 .container {
   width: 100%;
   max-width: var(--max-w);
@@ -49,11 +51,11 @@ body::after { animation-duration: 60s; opacity: .3; }
   text-align: center;
 }
 
-/* ================= PAGES ================= */
+/* ===== PAGES ===== */
 .page { display: none; }
 .page.active { display: block; }
 
-/* ================= ENVELOPE ================= */
+/* ===== ENVELOPE ===== */
 .envelope {
   width: 100%;
   max-width: 360px;
@@ -98,44 +100,51 @@ body::after { animation-duration: 60s; opacity: .3; }
   color: #ff6aa2;
   font-weight: bold;
 }
+
 .sub-text {
-  font-size: 13px;
+  font-size: 15px; /* ⬅️ increased slightly */
   color: #7a2d5c;
   letter-spacing: 1px;
 }
 
-/* ================= GIFT ================= */
+/* ===== GIFT ===== */
 .gift img {
   width: 100%;
   max-width: 200px;
   animation: pop 1s infinite alternate;
   cursor: pointer;
 }
+
 @keyframes pop {
   to { transform: scale(1.1); }
 }
 
-/* ================= CARD ================= */
+/* ===== CARD ===== */
 .card {
   background: #fff;
   border-radius: 18px;
-  padding: 16px;
+  padding: 18px;
   box-shadow: 0 10px 25px rgba(0,0,0,.15);
 }
 
+/* I'm Sorry heading */
 .card h2 {
   margin-top: 0;
-  font-size: 24px;
+  font-size: 26px;
+  font-family: 'Playfair Display', serif;
 }
 
+/* Apology paragraph (BIGGER & readable) */
 .card p {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 15.5px;   /* ⬅️ increased */
+  line-height: 1.7;
   color: #444;
+  margin-top: 12px;
 }
 
+/* Button */
 .btn {
-  margin-top: 12px;
+  margin-top: 14px;
   padding: 10px 20px;
   border: none;
   border-radius: 20px;
@@ -143,7 +152,7 @@ body::after { animation-duration: 60s; opacity: .3; }
   cursor: pointer;
 }
 
-/* ================= FLOWERS ================= */
+/* ===== FLOWERS ===== */
 .flowers {
   display: flex;
   flex-direction: column;
@@ -162,12 +171,15 @@ body::after { animation-duration: 60s; opacity: .3; }
   font-size: 14px;
   box-shadow: 0 8px 20px rgba(0,0,0,.15);
 }
+
 .flower-card h3 {
   margin-top: 0;
+  font-family: 'Dancing Script', cursive;
+  font-size: 22px;
   color: #ff6aa2;
 }
 
-/* desktop */
+/* Desktop */
 @media (min-width: 600px) {
   .flowers {
     flex-direction: row;
@@ -204,10 +216,20 @@ body::after { animation-duration: 60s; opacity: .3; }
   <div class="card">
     <h2>💗 I’m Sorry</h2>
     <p>
-      I’m really sorry for everything, Akka.<br><br>
-      You are my strength, my comfort and my home.<br><br>
-      I miss you more than I can explain.<br><br>
-      Please talk to me again, Akka.
+      I’m really sorry for everything, Akka.<br>
+      For every word, every moment, every pain I caused you.<br>
+      It’s a weight I carry with me every day.<br><br>
+
+      You are not just my sister.<br>
+      You are my strength, my comfort,
+      and the place my heart feels at home.<br><br>
+
+      I miss you more than I can explain.<br>
+      Your voice, your smile, the way you talk to me —
+      everything feels incomplete without you.<br><br>
+
+      I don’t want anything else right now.<br>
+      I just want to talk to you again, Akka.
     </p>
     <button class="btn" onclick="openFlowers()">Next</button>
   </div>
