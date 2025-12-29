@@ -1,203 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Little Gift</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --max-w: 480px;
+body{
+  margin:0;
+  min-height:100svh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ffd6e8,#ffe0f0,#ffb6d5);
+  font-family:"Comic Sans MS",Arial,sans-serif;
 }
 
-/* ===== BODY ===== */
-body {
-  margin: 0;
-  font-family: "Comic Sans MS", Arial, sans-serif;
-  background: linear-gradient(135deg, #ffd6e8, #ffe0f0, #ffb6d5);
-  min-height: 100svh;
-  overflow-x: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.container{
+  width:100%;
+  max-width:420px;
+  padding:16px;
+  text-align:center;
 }
 
-/* ===== CONTAINER ===== */
-.container {
-  width: 100%;
-  max-width: var(--max-w);
-  padding: 16px;
-  text-align: center;
+/* ENVELOPE */
+.envelope{
+  width:300px;
+  height:190px;
+  margin:auto;
+  border-radius:20px;
+  background:linear-gradient(145deg,#ffd9ea,#ffb6d5);
+  box-shadow:0 18px 35px rgba(255,105,180,.35);
+  position:relative;
+  overflow:hidden;
 }
 
-/* ===== PAGES ===== */
-.page {
-  display: none;
-  min-height: 70vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.page.active {
-  display: flex;
+.flap{
+  height:55%;
+  background:linear-gradient(145deg,#ffc1dc,#ff9fc7);
+  clip-path:polygon(0 0,100% 0,50% 100%);
 }
 
-/* ===== ENVELOPE ===== */
-.envelope {
-  width: 100%;
-  max-width: 320px;
-  height: 200px;
-  border-radius: 22px;
-  background: linear-gradient(145deg, #ffd9ea, #ffb6d5);
-  box-shadow: 0 20px 40px rgba(255,105,180,.35);
-  position: relative;
-  overflow: hidden;
-}
-.flap {
-  height: 55%;
-  background: linear-gradient(145deg, #ffc1dc, #ff9fc7);
-  clip-path: polygon(0 0,100% 0,50% 100%);
-  transform-origin: top;
-  transition: transform .9s ease;
+.heart{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  font-size:38px;
+  cursor:pointer;
+  animation:pulse 1.2s infinite;
 }
 
-.envelope.open .flap {
-  transform: rotateX(180deg);
+@keyframes pulse{
+  50%{transform:scale(1.2);}
 }
 
-.heart {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-size: 38px;
-  cursor: pointer;
-  animation: pulse 1.3s infinite;
+/* GIFT */
+.gift img{
+  width:150px;
+  cursor:pointer;
+  animation:pop 1s infinite alternate;
 }
 
-@keyframes pulse {
-  50% { transform: scale(1.2); }
+@keyframes pop{
+  to{transform:scale(1.08);}
 }
 
-.open-text {
-  margin-top: 12px;
-  font-size: 22px;
-  color: #ff6aa2;
-  font-weight: bold;
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
 }
 
-.sub-text {
-  font-size: 16px;
-  color: #7a2d5c;
-  margin-top: 6px;
+.card h2{
+  font-family:'Playfair Display',serif;
+  margin-top:0;
 }
 
-/* ===== GIFT ===== */
-.gift img {
-  width: 160px; /* 🔽 reduced size */
-  animation: pop 1s infinite alternate;
-  cursor: pointer;
+.card p{
+  font-size:15.5px;
+  line-height:1.7;
+  color:#444;
 }
 
-@keyframes pop {
-  to { transform: scale(1.08); }
+.btn{
+  margin-top:14px;
+  padding:10px 24px;
+  border:none;
+  border-radius:20px;
+  background:#c9b7ff;
+  cursor:pointer;
 }
 
-/* ===== CARD ===== */
-.card {
-  background: #fff;
-  border-radius: 18px;
-  padding: 18px;
-  box-shadow: 0 10px 25px rgba(0,0,0,.15);
+/* FLOWER */
+.flower-card{
+  background:#fff;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 
-.card h2 {
-  margin-top: 0;
-  font-size: 26px;
-  font-family: 'Playfair Display', serif;
-}
-
-.card p {
-  font-size: 15.5px;
-  line-height: 1.7;
-  color: #444;
-  margin-top: 10px;
-}
-
-.btn {
-  margin-top: 14px;
-  padding: 10px 22px;
-  border: none;
-  border-radius: 20px;
-  background: #c9b7ff;
-  cursor: pointer;
-}
-
-/* ===== FLOWERS ===== */
-.flowers {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-}
-
-.flowers img {
-  width: 100%;
-  border-radius: 16px;
-}
-
-.flower-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 14px;
-  font-size: 14px;
-  box-shadow: 0 8px 20px rgba(0,0,0,.15);
-}
-
-.flower-card h3 {
-  margin-top: 0;
-  font-family: 'Dancing Script', cursive;
-  font-size: 22px;
-  color: #ff6aa2;
-}
-
-/* Desktop */
-@media (min-width: 600px) {
-  .flowers {
-    flex-direction: row;
-  }
+.flower-card h3{
+  font-family:'Dancing Script',cursive;
+  font-size:24px;
+  color:#ff6aa2;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="container" id="app">
+  <!-- CONTENT WILL LOAD HERE -->
+</div>
 
-  <!-- PAGE 1 -->
-  <div id="page1" class="page active">
-    <div id="envelope" class="envelope">
+<script>
+const app = document.getElementById("app");
+
+showEnvelope();
+
+function showEnvelope(){
+  app.innerHTML = `
+    <div class="envelope">
       <div class="flap"></div>
-      <div class="heart" onclick="openEnvelope()">❤️</div>
+      <div class="heart" onclick="showGift()">❤️</div>
     </div>
-    <div class="open-text">Open</div>
-    <div class="sub-text">PLEASEEEEE</div>
-  </div>
+    <p style="font-size:22px;color:#ff6aa2;font-weight:bold;">Open</p>
+    <p style="color:#7a2d5c;">PLEASEEEEE</p>
+  `;
+}
 
-  <!-- PAGE 2 -->
-  <div id="page2" class="page">
-    <div class="gift" onclick="openLetter()">
+function showGift(){
+  app.innerHTML = `
+    <div class="gift" onclick="showSorry()">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGcyKqoXcS4e-aMwz8odGT5fjUxiHFaVpsZw&s">
     </div>
-    <div class="sub-text">Click the gift 💜</div>
-  </div>
+    <p style="color:#7a2d5c;">Click the gift 💜</p>
+  `;
+}
 
-  <!-- PAGE 3 -->
-  <div id="page3" class="page">
+function showSorry(){
+  app.innerHTML = `
     <div class="card">
       <h2>💗 I’m Sorry</h2>
       <p>
@@ -216,38 +163,24 @@ body {
         I don’t want anything else right now.<br>
         I just want to talk to you again, Akka.
       </p>
-      <button class="btn" onclick="openFlowers()">Next</button>
+      <button class="btn" onclick="showFlowers()">Next</button>
     </div>
-  </div>
-
-  <!-- PAGE 4 -->
-  <div id="page4" class="page">
-    <div class="flowers">
-      <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=600">
-      <div class="flower-card">
-        <h3>With Love 💐</h3>
-        <p>
-          Please accept my apology.<br><br>
-          I really miss you Akka 🥺<br><br>
-          give me one chance Akka<br><br>
-
-          <strong>I ❤️ U</strong>
-        </p>
-      </div>
-    </div>
-  </div>
-
-</div>
-<script>
-function openEnvelope() {
-  document.getElementById("envelope").classList.add("open");
-  setTimeout(() => switchPage(1,2), 800);
+  `;
 }
-function openLetter() { switchPage(2,3); }
-function openFlowers() { switchPage(3,4); }
-function switchPage(a,b){
-  document.getElementById("page"+a).classList.remove("active");
-  document.getElementById("page"+b).classList.add("active");
+
+function showFlowers(){
+  app.innerHTML = `
+    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=600"
+         style="width:100%;border-radius:16px;margin-bottom:12px;">
+    <div class="flower-card">
+      <h3>With Love 💐</h3>
+      <p>
+        Please accept my apology.<br><br>
+        I really miss you Akka 🥺<br><br>
+        <strong>I ❤️ U</strong>
+      </p>
+    </div>
+  `;
 }
 </script>
 
