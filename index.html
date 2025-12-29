@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Gift</title>
+
+<style>
+:root {
+  --card-w: min(92vw, 420px);
+}
+
+/* ===== Background ===== */
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: "Comic Sans MS", Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Gradient background */
+  background: linear-gradient(135deg, #ffd6e8, #ffe0f0, #ffb6d5);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Floating bubbles */
+body::before, body::after {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 2%, transparent 2%);
+  background-size: 50px 50px;
+  animation: floatBubbles 30s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  animation-duration: 45s;
+  opacity: 0.2;
+}
+
+@keyframes floatBubbles {
+  0% { transform: rotate(0deg) translateY(0); }
+  100% { transform: rotate(360deg) translateY(-100px); }
+}
+
+/* ===== Pages ===== */
+.page { display: none; }
+.page.active { display: block; }
+
+.container {
+  text-align: center;
+}
+
+/* ===== Envelope ===== */
+.envelope {
+  width: min(90vw, 380px);
+  height: 240px;
+  position: relative;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #ffd9ea, #ffb6d5);
+  box-shadow:
+    0 25px 50px rgba(255,105,180,0.35),
+    inset 0 4px 6px rgba(255,255,255,0.7);
+  overflow: hidden;
+}
+
+/* Decorative lines */
+.envelope::before,
+.envelope::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px dashed rgba(255,255,255,0.5);
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+.flap {
+  height: 55%;
+  background: linear-gradient(145deg, #ffc1dc, #ff9fc7);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transition: transform 0.9s ease;
+  box-shadow: inset 0 -3px 6px rgba(255,255,255,0.5);
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+/* Heart button */
+.heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 46px;
+  cursor: pointer;
+  animation: heartGlow 1.3s infinite;
+  filter: drop-shadow(0 0 12px rgba(255,0,102,0.7));
+}
+
+ 
+
+
+
+/* ===== Text ===== */
+.open-text {
+  margin-top: 16px;
+  font-size: 26px;
+  color: #ff6aa2;
+  font-weight: bold;
+}
+
+.sub-text {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #7a2d5c;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  margin-top: 14px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: #c9b7ff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ===== Gift ===== */
+.gift {
+  font-size: 100px;
+  animation: pop 1s infinite alternate;
+}
+
+@keyframes pop {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+/* ===== Card ===== */
+.card {
+  width: var(--card-w);
+  background: #fff;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.15);
+}
+
+.card h2 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* ===== Flowers Page ===== */
+.flowers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.flowers img {
+  width: 600px;
+  border-radius: 16px;
+}
+
+.flower-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 14px;
+  font-size: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.15);
+}
+
+.flower-card h3 {
+  margin: 0 0 8px;
+  color: #ff6aa2;
+}
+.gift {
+  font-size: 100px;
+  animation: pop 1s infinite alternate;
+  cursor: pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- PAGE 1 : ENVELOPE -->
+  <div id="page1" class="page active">
+    <div id="envelope" class="envelope">
+      <div class="flap"></div>
+      <div class="heart" onclick="openEnvelope()">❤️</div>
+    </div>
+    <div class="open-text">open</div>
+    <div class="sub-text">PLEASEEEEEEEE</div>
+  </div>
+
+<!-- PAGE 2 : GIFT -->
+    <div id="page2" class="page">
+         <div class="gift" onclick="openLetter()"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGcyKqoXcS4e-aMwz8odGT5fjUxiHFaVpsZw&s"></div>
+             <div class="sub-text">Click the gift to open 💜</div>
+     </div>
+  
+  <!-- PAGE 3 : APOLOGY LETTER -->
+  <div id="page3" class="page">
+    <div class="card">
+      <h2>💗 I’m Sorry</h2>
+      <p>
+        I’m really sorry for everything, Akka.<br>
+For every word, every moment, every pain I caused you.<br>
+It’s a weight I carry with me every day.<br><br>
+
+You are not just my sister.<br>
+You are my strength, my comfort,
+and the place my heart feels at home.<br><br>
+
+I miss you more than I can explain.<br>
+Your voice, your smile, the way you talk to me —
+everything feels incomplete without you.<br><br>
+
+I don’t want anything else right now.<br>
+I just want to talk to you again, Akka.
+      </p>
+      <button class="btn" onclick="openFlowers()">Next</button>
+    </div>
+  </div>
+
+  <!-- PAGE 4 : FLOWERS -->
+  <div id="page4" class="page">
+    <div class="flowers">
+      <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=600" alt="Flowers">
+      <div class="flower-card">
+        <h3>With Love and Apology 💐</h3>
+<p>
+Please take these flowers and accept my apology…<br><br>
+I really miss you, Akka.<br>
+Please give me one chance.<br><br>
+<strong>I ❤️ U</strong>
+</p>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function openEnvelope() {
+  const env = document.getElementById("envelope");
+  env.classList.add("open");
+
+  setTimeout(() => {
+    pageSwitch(1,2);
+  }, 800);
+}
+
+function openLetter() {
+  pageSwitch(2,3);
+}
+
+function openFlowers() {
+  pageSwitch(3,4);
+}
+
+function pageSwitch(from, to) {
+  document.getElementById("page"+from).classList.remove("active");
+  document.getElementById("page"+to).classList.add("active");
+}
+</script>
+
+</body>
+</html>
