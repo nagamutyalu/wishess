@@ -10,16 +10,14 @@
   --card-w: min(92vw, 420px);
 }
 
-/* ===== Background ===== */
+/* ===== Body & Background ===== */
 body {
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
   font-family: "Comic Sans MS", Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* Gradient background */
   background: linear-gradient(135deg, #ffd6e8, #ffe0f0, #ffb6d5);
   overflow: hidden;
   position: relative;
@@ -51,12 +49,10 @@ body::after {
 }
 
 /* ===== Pages ===== */
-.page { display: none; }
+.page { display: none; padding: 10px; width: 100%; box-sizing: border-box; }
 .page.active { display: block; }
 
-.container {
-  text-align: center;
-}
+.container { text-align: center; width: 100%; }
 
 /* ===== Envelope ===== */
 .envelope {
@@ -69,6 +65,7 @@ body::after {
     0 25px 50px rgba(255,105,180,0.35),
     inset 0 4px 6px rgba(255,255,255,0.7);
   overflow: hidden;
+  margin: 0 auto;
 }
 
 /* Decorative lines */
@@ -102,27 +99,29 @@ body::after {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 46px;
+  font-size: clamp(32px, 8vw, 46px);
   cursor: pointer;
   animation: heartGlow 1.3s infinite;
   filter: drop-shadow(0 0 12px rgba(255,0,102,0.7));
 }
 
- 
-
-
+/* Heart animation */
+@keyframes heartGlow {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.2); }
+}
 
 /* ===== Text ===== */
 .open-text {
   margin-top: 16px;
-  font-size: 26px;
+  font-size: clamp(18px, 5vw, 26px);
   color: #ff6aa2;
   font-weight: bold;
 }
 
 .sub-text {
-  font-size: 14px;
-  letter-spacing: 2px;
+  font-size: clamp(12px, 3vw, 14px);
+  letter-spacing: 1.5px;
   color: #7a2d5c;
 }
 
@@ -133,14 +132,17 @@ body::after {
   border: none;
   border-radius: 20px;
   background: #c9b7ff;
-  font-size: 14px;
+  font-size: clamp(12px, 3vw, 14px);
   cursor: pointer;
+  width: 90%;
+  max-width: 240px;
 }
 
 /* ===== Gift ===== */
 .gift {
-  font-size: 100px;
+  font-size: clamp(60px, 20vw, 100px);
   animation: pop 1s infinite alternate;
+  cursor: pointer;
 }
 
 @keyframes pop {
@@ -151,33 +153,49 @@ body::after {
 /* ===== Card ===== */
 .card {
   width: var(--card-w);
+  max-width: 95vw;
+  max-height: 80vh; /* Responsive height */
+  margin: 0 auto;
   background: #fff;
   border-radius: 18px;
-  padding: 20px;
+  padding: 16px;
   box-shadow: 0 10px 25px rgba(0,0,0,.15);
+  overflow-y: auto; /* Scroll if content overflows */
+  box-sizing: border-box;
 }
 
 .card h2 {
   margin: 0;
-  font-size: 26px;
+  font-size: clamp(20px, 6vw, 26px);
 }
 
 .card p {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: clamp(12px, 2.5vw, 16px);
+  line-height: 1.5;
   color: #444;
+}
+
+/* Scrollbar styling (optional) */
+.card::-webkit-scrollbar {
+  width: 6px;
+}
+.card::-webkit-scrollbar-thumb {
+  background-color: rgba(255,0,102,0.3);
+  border-radius: 3px;
 }
 
 /* ===== Flowers Page ===== */
 .flowers {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
   align-items: center;
+  width: 100%;
 }
 
 .flowers img {
-  width: 600px;
+  width: 90%;
+  max-width: 600px;
   border-radius: 16px;
 }
 
@@ -185,19 +203,26 @@ body::after {
   background: #fff;
   border-radius: 16px;
   padding: 14px;
-  font-size: 14px;
+  font-size: clamp(12px, 3vw, 14px);
   box-shadow: 0 8px 20px rgba(0,0,0,.15);
+  width: 90%;
+  max-width: 320px;
 }
 
 .flower-card h3 {
   margin: 0 0 8px;
   color: #ff6aa2;
 }
-.gift {
-  font-size: 100px;
-  animation: pop 1s infinite alternate;
-  cursor: pointer;
+
+/* ===== Responsive Grid Fix ===== */
+@media (min-width: 600px) {
+  .flowers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
 }
+
 
 </style>
 </head>
@@ -254,7 +279,7 @@ I just want to talk to you again, Akka.
         <h3>With Love and Apology 💐</h3>
 <p>
 Please take these flowers and accept my apology…<br><br>
-I really miss you, Akka🥺.<br>
+I really miss you, Akka.🥺<br>
 Please give me one chance.<br><br>
 <strong>I ❤️ U</strong>
 </p>
